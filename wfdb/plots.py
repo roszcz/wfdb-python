@@ -205,7 +205,7 @@ def plotann(annotation, title = None, timeunits = 'samples', returnfig = False):
 def checkannplotitems(annotation, title, timeunits):
     
     # signals
-    if type(annotation)!= annotations.Annotation:
+    if not isinstance(annotation, annotations.Annotation):
         raise TypeError("The 'annotation' field must be a 'wfdb.Annotation' object")
 
     # fs and timeunits
