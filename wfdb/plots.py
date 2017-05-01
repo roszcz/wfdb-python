@@ -41,15 +41,15 @@ def plotrec(record=None, title = None, annotation = None, annch = [0], timeunits
     
     # Create the plot  
     fig=plt.figure()
-    
+
     for ch in range(nsig):
         # Plot signal channel
         ax = fig.add_subplot(nsig, 1, ch+1)
-        ax.plot(t, record.p_signals[:,ch]) 
-        
+        ax.plot(t, record.p_signals[:,ch])
+
         if (title is not None) and (ch==0):
             plt.title(title)
-            
+
         # Plot annotation if specified
         if annotation is not None and ch in annch:
             ax.plot(tann, record.p_signals[annotation.annsamp, ch], 'r+')
@@ -59,7 +59,7 @@ def plotrec(record=None, title = None, annotation = None, annch = [0], timeunits
             plt.xlabel('index/sample')
         else:
             plt.xlabel('time/'+timeunits[:-1])
-            
+
         if record.signame[ch] is not None:
             chanlabel=record.signame[ch]
         else:
@@ -69,7 +69,7 @@ def plotrec(record=None, title = None, annotation = None, annch = [0], timeunits
         else:
             unitlabel='NU'
         plt.ylabel(chanlabel+"/"+unitlabel)
-        
+
     plt.show(fig)
     
     # Return the figure if requested
@@ -79,7 +79,7 @@ def plotrec(record=None, title = None, annotation = None, annch = [0], timeunits
 # Check the validity of items used to make the plot
 # Return the x axis time values to plot for the record (and annotation if any)
 def checkplotitems(record, title, annotation, annch, timeunits):
-    
+
     # signals
     if type(record) != records.Record:
         raise TypeError("The 'record' argument must be a valid wfdb.Record object")
@@ -129,7 +129,7 @@ def checkplotitems(record, title, annotation, annch, timeunits):
     
     # Annotations if any
     if annotation is not None:
-        if type(annotation) != annotations.Annotation:
+        if not isinstance(annotation, annotations.Annotation):
             raise TypeError("The 'annotation' argument must be a valid wfdb.Annotation object")
         if type(annch)!= list:
             raise TypeError("The 'annch' argument must be a list of integers")
@@ -203,7 +203,7 @@ def plotann(annotation, title = None, timeunits = 'samples', returnfig = False):
 
 # Check the validity of items used to make the annotation plot
 def checkannplotitems(annotation, title, timeunits):
-    
+
     # signals
     if not isinstance(annotation, annotations.Annotation):
         raise TypeError("The 'annotation' field must be a 'wfdb.Annotation' object")

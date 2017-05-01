@@ -43,6 +43,7 @@ class Annotation():
 
         self.annsamp = annsamp
         self.anntype = anntype
+        self.annids = np.array([revannsyms[t] for t in anntype])
         self.subtype = subtype
         self.chan = chan
         self.num = num

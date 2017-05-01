@@ -44,7 +44,7 @@ class BaseRecord(object):
         # Check that the field is present
         if getattr(self, field) is None:
             raise Exception("Missing field required: "+field)
-           
+
         # Check the type of the field (and of its elements if it should be a list) 
         self.checkfieldtype(field, channels)
 
